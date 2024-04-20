@@ -1,0 +1,25 @@
+services:
+  web:
+    image: kauanbarros/webserver-versatil:1.0
+    container_name: webserver
+    ports:
+      - "80:80"
+    volumes:
+      - ./shared:/var/www/html
+    environment:
+      - HTPASSWD_USERNAME=kauan
+      - HTPASSWD_PASSWORD=123
+    restart: unless-stopped
+
+  mysql:
+    image: mysql:latest
+    container_name: mysqlserver
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_USER: aluno
+      MYSQL_PASSWORD: 123
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./dados_mysql:/var/lib/mysql
+    restart: unless-stopped
